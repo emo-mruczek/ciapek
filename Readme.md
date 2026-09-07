@@ -13,4 +13,4 @@ Why 16-bit? Because everyone else does 8 or 32 or 64.
 
 ##### Part 2 - constructing an ISA for 16-bit datapath
 
-##### Part 3 - 
+##### Part 3 - implementing state elements
