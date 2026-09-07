@@ -24,3 +24,23 @@ map -intstyle ise -p xc6slx9-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -reg
 par -w -intstyle ise -ol high -mt off register_file_map.ncd register_file.ncd register_file.pcf 
 trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml register_file.twx register_file.ncd -o register_file.twr register_file.pcf -ucf register_file.ucf 
 bitgen -intstyle ise -f register_file.ut register_file.ncd 
+bitgen -intstyle ise -f register_file.ut register_file.ncd 
+xst -intstyle ise -ifn "/home/felix/prjcts/ciapek/ciapek/register_file.xst" -ofn "/home/felix/prjcts/ciapek/ciapek/register_file.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc register_file.ucf -p xc6slx9-csg324-3 register_file.ngc register_file.ngd  
+map -intstyle ise -p xc6slx9-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o register_file_map.ncd register_file.ngd register_file.pcf 
+par -w -intstyle ise -ol high -mt off register_file_map.ncd register_file.ncd register_file.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml register_file.twx register_file.ncd -o register_file.twr register_file.pcf -ucf register_file.ucf 
+bitgen -intstyle ise -f register_file.ut register_file.ncd 
+xst -intstyle ise -ifn "/home/felix/prjcts/ciapek/ciapek/register_file.xst" -ofn "/home/felix/prjcts/ciapek/ciapek/register_file.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc register_file.ucf -p xc6slx9-csg324-3 register_file.ngc register_file.ngd  
+map -intstyle ise -p xc6slx9-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o register_file_map.ncd register_file.ngd register_file.pcf 
+par -w -intstyle ise -ol high -mt off register_file_map.ncd register_file.ncd register_file.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml register_file.twx register_file.ncd -o register_file.twr register_file.pcf -ucf register_file.ucf 
+bitgen -intstyle ise -f register_file.ut register_file.ncd 
+xpwr -intstyle ise -ol std register_file.ncd register_file.pcf -o register_file.pwr 
+xst -intstyle ise -ifn "/home/felix/prjcts/ciapek/ciapek/register_file.xst" -ofn "/home/felix/prjcts/ciapek/ciapek/register_file.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc register_file.ucf -p xc6slx9-csg324-3 register_file.ngc register_file.ngd  
+map -intstyle ise -p xc6slx9-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o register_file_map.ncd register_file.ngd register_file.pcf 
+par -w -intstyle ise -ol high -mt off register_file_map.ncd register_file.ncd register_file.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml register_file.twx register_file.ncd -o register_file.twr register_file.pcf -ucf register_file.ucf 
+bitgen -intstyle ise -f register_file.ut register_file.ncd 

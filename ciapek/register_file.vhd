@@ -66,30 +66,32 @@ begin
   registers_choice := dip0 & dip1& dip2 & dip3 & dip4 & dip5 & dip6 & dip7;
 
   -- DEBUG 
-  registers(0) <= "1000000000000001";
+  registers(1) <= "0000000000000111";
+  registers(0) <= "0100000000000100";
   
   -- for now disp only lower bits
+  -- 0 when ON
   case registers_choice is 
-    when "00000001" => register_choosen := registers(0);
-    when "00000010" => register_choosen := registers(1);   
-    when "00000100" => register_choosen := registers(2);
-    when "00001000" => register_choosen := registers(3);
-    when "00010000" => register_choosen := registers(4);
-    when "00100000" => register_choosen := registers(5);
-    when "01000000" => register_choosen := registers(6);
-    when "10000000" => register_choosen := registers(7);
+    when "11111110" => register_choosen := registers(0);
+    when "11111101" => register_choosen := registers(1);   
+    when "11111011" => register_choosen := registers(2);
+    when "11110111" => register_choosen := registers(3);
+    when "11101111" => register_choosen := registers(4);
+    when "11011111" => register_choosen := registers(5);
+    when "10111111" => register_choosen := registers(6);
+    when "01111111" => register_choosen := registers(7);
     when others => register_choosen := registers(0);
   end case;
 
   -- disp lb 
-  led0 <= register_choosen(0);
-  led1 <= register_choosen(1);
-  led2 <= register_choosen(2);
-  led3 <= register_choosen(3);
-  led4 <= register_choosen(4);
-  led5 <= register_choosen(5);
-  led6 <= register_choosen(6);
-  led7 <= register_choosen(7);
+  led0 <= register_choosen(7);
+  led1 <= register_choosen(6);
+  led2 <= register_choosen(5);
+  led3 <= register_choosen(4);
+  led4 <= register_choosen(3);
+  led5 <= register_choosen(2);
+  led6 <= register_choosen(1);
+  led7 <= register_choosen(0);
 
 end process;
 

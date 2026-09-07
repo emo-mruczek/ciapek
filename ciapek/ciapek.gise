@@ -28,6 +28,7 @@
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/par.xmsgs"/>
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/trce.xmsgs"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xpwr.xmsgs"/>
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
     <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="netgen"/>
     <file xil_pn:branch="PostMapSimulation" xil_pn:fileType="FILE_NETGEN_REPORT" xil_pn:name="netgen/map/register_file_map.nlf"/>
@@ -36,6 +37,7 @@
     <file xil_pn:fileType="FILE_NETGEN_REPORT" xil_pn:name="netgen/synthesis/register_file_synthesis.nlf"/>
     <file xil_pn:fileType="FILE_VHDL" xil_pn:name="netgen/synthesis/register_file_synthesis.vhd"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BITGEN_REPORT" xil_pn:name="register_file.bgn" xil_pn:subbranch="FPGAConfiguration"/>
+    <file xil_pn:fileType="FILE_BIN" xil_pn:name="register_file.bin"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BIT" xil_pn:name="register_file.bit" xil_pn:subbranch="FPGAConfiguration"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGDBUILD_LOG" xil_pn:name="register_file.bld"/>
     <file xil_pn:fileType="FILE_CMD_LOG" xil_pn:name="register_file.cmd_log"/>
@@ -50,6 +52,7 @@
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PCF" xil_pn:name="register_file.pcf" xil_pn:subbranch="Map"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="register_file.prj"/>
     <file xil_pn:fileType="FILE_TRCE_MISC" xil_pn:name="register_file.ptwx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_POWER_REPORT" xil_pn:name="register_file.pwr"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="register_file.stx"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="register_file.syr"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_TIMING_TXT_REPORT" xil_pn:name="register_file.twr" xil_pn:subbranch="Par"/>
@@ -111,7 +114,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1788780156" xil_pn:in_ck="1713575052421288532" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="-6146987885401896065" xil_pn:start_ts="1788780153">
+    <transform xil_pn:end_ts="1788783955" xil_pn:in_ck="1713575052421288532" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="-6146987885401896065" xil_pn:start_ts="1788783953">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -133,7 +136,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1788780159" xil_pn:in_ck="5245797568523081434" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="1589060674134205457" xil_pn:start_ts="1788780156">
+    <transform xil_pn:end_ts="1788783957" xil_pn:in_ck="5245797568523081434" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="1589060674134205457" xil_pn:start_ts="1788783955">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_ngo"/>
@@ -142,7 +145,7 @@
       <outfile xil_pn:name="register_file.ngd"/>
       <outfile xil_pn:name="register_file_ngdbuild.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1788780163" xil_pn:in_ck="8137145942454515963" xil_pn:name="TRANEXT_map_spartan6" xil_pn:prop_ck="1405206279585514545" xil_pn:start_ts="1788780159">
+    <transform xil_pn:end_ts="1788783960" xil_pn:in_ck="8137145942454515963" xil_pn:name="TRANEXT_map_spartan6" xil_pn:prop_ck="1405206279585514545" xil_pn:start_ts="1788783957">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/map.xmsgs"/>
@@ -155,7 +158,7 @@
       <outfile xil_pn:name="register_file_summary.xml"/>
       <outfile xil_pn:name="register_file_usage.xml"/>
     </transform>
-    <transform xil_pn:end_ts="1788780169" xil_pn:in_ck="-9011887329321734092" xil_pn:name="TRANEXT_par_spartan6" xil_pn:prop_ck="93661965788626211" xil_pn:start_ts="1788780163">
+    <transform xil_pn:end_ts="1788783965" xil_pn:in_ck="-9011887329321734092" xil_pn:name="TRANEXT_par_spartan6" xil_pn:prop_ck="93661965788626211" xil_pn:start_ts="1788783960">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/par.xmsgs"/>
@@ -169,11 +172,12 @@
       <outfile xil_pn:name="register_file_pad.txt"/>
       <outfile xil_pn:name="register_file_par.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1788780217" xil_pn:in_ck="1713575052421279655" xil_pn:name="TRANEXT_bitFile_spartan6" xil_pn:prop_ck="396117104113915555" xil_pn:start_ts="1788780214">
+    <transform xil_pn:end_ts="1788784066" xil_pn:in_ck="1713575052421279655" xil_pn:name="TRANEXT_bitFile_spartan6" xil_pn:prop_ck="6587536580693756888" xil_pn:start_ts="1788784063">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/bitgen.xmsgs"/>
       <outfile xil_pn:name="register_file.bgn"/>
+      <outfile xil_pn:name="register_file.bin"/>
       <outfile xil_pn:name="register_file.bit"/>
       <outfile xil_pn:name="register_file.drc"/>
       <outfile xil_pn:name="register_file.ut"/>
@@ -181,7 +185,16 @@
       <outfile xil_pn:name="webtalk.log"/>
       <outfile xil_pn:name="webtalk_pn.xml"/>
     </transform>
-    <transform xil_pn:end_ts="1788780169" xil_pn:in_ck="-4585957942303809545" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416185" xil_pn:start_ts="1788780167">
+    <transform xil_pn:end_ts="1788783578" xil_pn:in_ck="1713575052421279655" xil_pn:name="TRAN_genPowerData_spartan6" xil_pn:prop_ck="6853739419824492501" xil_pn:start_ts="1788783575">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="WarningsGenerated"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <outfile xil_pn:name="_xmsgs/xpwr.xmsgs"/>
+      <outfile xil_pn:name="register_file.pwr"/>
+    </transform>
+    <transform xil_pn:end_ts="1788783965" xil_pn:in_ck="-4585957942303809545" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416185" xil_pn:start_ts="1788783963">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/trce.xmsgs"/>

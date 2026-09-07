@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.02 secs
+Total CPU time to Xst completion: 0.01 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.02 secs
+Total CPU time to Xst completion: 0.01 secs
  
 --> 
 Reading design: register_file.prj
@@ -117,8 +117,6 @@ Parsing architecture <Behavioral> of entity <register_file>.
 =========================================================================
 
 Elaborating entity <register_file> (architecture <Behavioral>) from library <work>.
-WARNING:HDLCompiler:92 - "/home/felix/prjcts/ciapek/ciapek/register_file.vhd" Line 73: registers should be on the sensitivity list of the process
-WARNING:HDLCompiler:92 - "/home/felix/prjcts/ciapek/ciapek/register_file.vhd" Line 74: registers should be on the sensitivity list of the process
 WARNING:HDLCompiler:92 - "/home/felix/prjcts/ciapek/ciapek/register_file.vhd" Line 75: registers should be on the sensitivity list of the process
 WARNING:HDLCompiler:92 - "/home/felix/prjcts/ciapek/ciapek/register_file.vhd" Line 76: registers should be on the sensitivity list of the process
 WARNING:HDLCompiler:92 - "/home/felix/prjcts/ciapek/ciapek/register_file.vhd" Line 77: registers should be on the sensitivity list of the process
@@ -126,6 +124,8 @@ WARNING:HDLCompiler:92 - "/home/felix/prjcts/ciapek/ciapek/register_file.vhd" Li
 WARNING:HDLCompiler:92 - "/home/felix/prjcts/ciapek/ciapek/register_file.vhd" Line 79: registers should be on the sensitivity list of the process
 WARNING:HDLCompiler:92 - "/home/felix/prjcts/ciapek/ciapek/register_file.vhd" Line 80: registers should be on the sensitivity list of the process
 WARNING:HDLCompiler:92 - "/home/felix/prjcts/ciapek/ciapek/register_file.vhd" Line 81: registers should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "/home/felix/prjcts/ciapek/ciapek/register_file.vhd" Line 82: registers should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "/home/felix/prjcts/ciapek/ciapek/register_file.vhd" Line 83: registers should be on the sensitivity list of the process
 WARNING:HDLCompiler:634 - "/home/felix/prjcts/ciapek/ciapek/register_file.vhd" Line 26: Net <registers[7][15]> does not have a driver.
 
 =========================================================================
@@ -147,7 +147,6 @@ WARNING:Xst:653 - Signal <registers<5>> is used but never assigned. This sourcel
 WARNING:Xst:653 - Signal <registers<4>> is used but never assigned. This sourceless signal will be automatically connected to value GND.
 WARNING:Xst:653 - Signal <registers<3>> is used but never assigned. This sourceless signal will be automatically connected to value GND.
 WARNING:Xst:653 - Signal <registers<2>> is used but never assigned. This sourceless signal will be automatically connected to value GND.
-WARNING:Xst:653 - Signal <registers<1>> is used but never assigned. This sourceless signal will be automatically connected to value GND.
     Summary:
 	no macro.
 Unit <register_file> synthesized.
@@ -206,10 +205,10 @@ Top Level Output File Name         : register_file.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 4
+# BELS                             : 5
 #      GND                         : 1
-#      LUT4                        : 2
-#      LUT6                        : 1
+#      LUT3                        : 2
+#      LUT6                        : 2
 # IO Buffers                       : 16
 #      IBUF                        : 8
 #      OBUF                        : 8
@@ -221,14 +220,14 @@ Selected Device : 6slx9csg324-3
 
 
 Slice Logic Utilization: 
- Number of Slice LUTs:                    3  out of   5720     0%  
-    Number used as Logic:                 3  out of   5720     0%  
+ Number of Slice LUTs:                    4  out of   5720     0%  
+    Number used as Logic:                 4  out of   5720     0%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:      3
-   Number with an unused Flip Flop:       3  out of      3   100%  
-   Number with an unused LUT:             0  out of      3     0%  
-   Number of fully used LUT-FF pairs:     0  out of      3     0%  
+ Number of LUT Flip Flop pairs used:      4
+   Number with an unused Flip Flop:       4  out of      4   100%  
+   Number with an unused LUT:             0  out of      4     0%  
+   Number of fully used LUT-FF pairs:     0  out of      4     0%  
    Number of unique control sets:         0
 
 IO Utilization: 
@@ -268,7 +267,7 @@ Speed Grade: -3
    Minimum period: No path found
    Minimum input arrival time before clock: No path found
    Maximum output required time after clock: No path found
-   Maximum combinational path delay: 6.452ns
+   Maximum combinational path delay: 6.443ns
 
 Timing Details:
 ---------------
@@ -276,23 +275,23 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default path analysis
-  Total number of paths / destination ports: 12 / 1
+  Total number of paths / destination ports: 24 / 3
 -------------------------------------------------------------------------
-Delay:               6.452ns (Levels of Logic = 4)
-  Source:            dip3 (PAD)
-  Destination:       led0 (PAD)
+Delay:               6.443ns (Levels of Logic = 4)
+  Source:            dip5 (PAD)
+  Destination:       led5 (PAD)
 
-  Data Path: dip3 to led0
+  Data Path: dip5 to led5
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             2   1.222   0.864  dip3_IBUF (dip3_IBUF)
-     LUT4:I0->O            1   0.203   0.808  _n0035_SW1 (N3)
-     LUT6:I3->O            1   0.205   0.579  _n0035 (led0_OBUF)
-     OBUF:I->O                 2.571          led0_OBUF (led0)
+     IBUF:I->O             2   1.222   0.981  dip5_IBUF (dip5_IBUF)
+     LUT6:I0->O            1   0.203   0.684  led5_SW0 (N2)
+     LUT3:I1->O            1   0.203   0.579  led5 (led5_OBUF)
+     OBUF:I->O                 2.571          led5_OBUF (led5)
     ----------------------------------------
-    Total                      6.452ns (4.201ns logic, 2.251ns route)
-                                       (65.1% logic, 34.9% route)
+    Total                      6.443ns (4.199ns logic, 2.244ns route)
+                                       (65.2% logic, 34.8% route)
 
 =========================================================================
 
@@ -303,14 +302,14 @@ Cross Clock Domains Report:
 
 
 Total REAL time to Xst completion: 2.00 secs
-Total CPU time to Xst completion: 2.18 secs
+Total CPU time to Xst completion: 1.77 secs
  
 --> 
 
 
-Total memory usage is 382264 kilobytes
+Total memory usage is 382292 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   24 (   0 filtered)
+Number of warnings :   23 (   0 filtered)
 Number of infos    :    0 (   0 filtered)
 

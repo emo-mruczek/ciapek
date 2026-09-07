@@ -36,18 +36,34 @@ Pad to Pad
 ---------------+---------------+---------+
 Source Pad     |Destination Pad|  Delay  |
 ---------------+---------------+---------+
-dip0           |led0           |   10.727|
-dip1           |led0           |   10.506|
-dip2           |led0           |   10.502|
-dip3           |led0           |   10.219|
-dip4           |led0           |    9.582|
-dip5           |led0           |    9.680|
-dip6           |led0           |    9.441|
-dip7           |led0           |    9.847|
+dip0           |led5           |   10.494|
+dip0           |led6           |    9.895|
+dip0           |led7           |   10.229|
+dip1           |led5           |   10.540|
+dip1           |led6           |   10.169|
+dip1           |led7           |   10.503|
+dip2           |led5           |   10.425|
+dip2           |led6           |    9.837|
+dip2           |led7           |   10.171|
+dip3           |led5           |   10.276|
+dip3           |led6           |    9.294|
+dip3           |led7           |    9.628|
+dip4           |led5           |   10.381|
+dip4           |led6           |    9.365|
+dip4           |led7           |    9.699|
+dip5           |led5           |   10.415|
+dip5           |led6           |    9.283|
+dip5           |led7           |    9.617|
+dip6           |led5           |    9.807|
+dip6           |led6           |    9.396|
+dip6           |led7           |    9.730|
+dip7           |led5           |    9.706|
+dip7           |led6           |    9.606|
+dip7           |led7           |    9.940|
 ---------------+---------------+---------+
 
 
-Analysis completed Mon Sep  7 13:22:49 2026 
+Analysis completed Mon Sep  7 14:26:05 2026 
 --------------------------------------------------------------------------------
 
 Trace Settings:
