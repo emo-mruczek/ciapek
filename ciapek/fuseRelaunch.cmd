@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "/home/felix/prjcts/ciapek/ciapek/register_file_isim_beh.exe" -prj "/home/felix/prjcts/ciapek/ciapek/register_file_beh.prj" "work.register_file" 

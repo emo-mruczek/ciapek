@@ -5,5 +5,8 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
+<msg type="info" file="ConstraintSystem" num="0" >The Period constraint &lt;PERIOD = 100MHz;&gt; [register_file.ucf(1)], is specified using the Net Period method which is not recommended. Please use the Timespec PERIOD method.
+</msg>
+
 </messages>
 

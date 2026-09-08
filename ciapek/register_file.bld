@@ -3,16 +3,21 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 Command Line:
 /home/felix/prjcts/ise/ise/14.7/ISE_DS/ISE/bin/lin64/unwrapped/ngdbuild
--intstyle ise -dd _ngo -nt timestamp -uc register_file.ucf -p xc6slx9-csg324-3
-register_file.ngc register_file.ngd
+-intstyle ise -dd _ngo -nt timestamp -uc register_file.ucf -uc
+register_file_tb.ucf -p xc6slx9-csg324-3 register_file.ngc register_file.ngd
 
 Reading NGO file "/home/felix/prjcts/ciapek/ciapek/register_file.ngc" ...
 Gathering constraint information from source properties...
 Done.
 
 Annotating constraints to design from ucf file "register_file.ucf" ...
+Annotating constraints to design from ucf file "register_file_tb.ucf" ...
 Resolving constraint associations...
 Checking Constraint Associations...
+INFO:ConstraintSystem - The Period constraint <PERIOD = 100MHz;>
+   [register_file.ucf(1)], is specified using the Net Period method which is not
+   recommended. Please use the Timespec PERIOD method.
+
 Done...
 
 Checking expanded design ...
@@ -28,7 +33,7 @@ NGDBUILD Design Results Summary:
   Number of errors:     0
   Number of warnings:   0
 
-Total memory usage is 404308 kilobytes
+Total memory usage is 405008 kilobytes
 
 Writing NGD file "register_file.ngd" ...
 Total REAL time to NGDBUILD completion:  1 sec

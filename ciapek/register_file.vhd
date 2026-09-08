@@ -14,9 +14,9 @@ entity register_file is
            rd1_out : out  STD_LOGIC_VECTOR (15 downto 0);
            rd2_out : out  STD_LOGIC_VECTOR (15 downto 0);
            -- for debugging on MIMASv2
-           dip0, dip1, dip2, dip3, dip4, dip5, dip6, dip7 : in STD_LOGIC;
+           dip0, dip1, dip2, dip3, dip4, dip5, dip6, dip7 : in STD_LOGIC := '0';
            led0, led1, led2, led3, led4, led5, led6, led7 : out STD_LOGIC;
-           switch0 : in STD_LOGIC);
+           button0 : in STD_LOGIC);
 end register_file;
 
 architecture Behavioral of register_file is
@@ -25,49 +25,66 @@ architecture Behavioral of register_file is
 type registers_type is array (15 downto 0) of STD_LOGIC_VECTOR (15 downto 0);
 signal registers: registers_type; -- internal var
 
+-- for state machine for displaying register content
+type statetype is (L, H);
+signal disp_state, disp_nextstate: statetype;
+
 begin
 
--- -- writting on rising edge
--- -- in processes signals keep theri old value
--- -- until an event in the sens. list takes place
--- process(clk) begin 
--- if clk'event and clk = '1' then -- RISING_EDGE(clk)
--- 	if we3_in = '1' then
--- 		registers(CONV_INTEGER(ra3_in)) <= wd3_in;
--- 	end if;
--- end if;
--- end process;
---
--- -- reading 
--- -- clock doesnt matter
--- process(ra1_in, ra2_in) begin
--- 	-- reg 0 always 0
--- 	if (CONV_INTEGER(ra1_in) = 0) then
--- 		rd1_out <= (others => '0');
--- 	else
--- 		rd1_out <= registers(CONV_INTEGER(ra1_in));
--- 	end if;
---
--- 	-- for both ports
--- 	if (CONV_INTEGER(ra2_in) = 0) then
--- 		rd2_out <= (others => '0');
--- 	else
--- 		rd2_out <= registers(CONV_INTEGER(ra2_in));
--- 	end if;
--- end process;
+-- writting on rising edge
+-- in processes signals keep theri old value
+-- until an event in the sens. list takes place
+process(clk) begin 
+if clk'event and clk = '1' then -- RISING_EDGE(clk)
+	if we3_in = '1' then
+		registers(CONV_INTEGER(ra3_in)) <= wd3_in;
+	end if;
+end if;
+end process;
 
--- TODO: only one dip switch up
+-- reading 
+-- clock doesnt matter
+process(ra1_in, ra2_in) begin
+	-- reg 0 always 0
+	if (CONV_INTEGER(ra1_in) = 0) then
+		rd1_out <= (others => '0');
+	else
+		rd1_out <= registers(CONV_INTEGER(ra1_in));
+	end if;
+
+	-- for both ports
+	if (CONV_INTEGER(ra2_in) = 0) then
+		rd2_out <= (others => '0');
+	else
+		rd2_out <= registers(CONV_INTEGER(ra2_in));
+	end if;
+end process;
+
+-- state machine 
+-- https://stackoverflow.com/questions/7589443/xilinx-error-place-1018-message
+-- TODO: fix, its very silly and not working properly
+process(clk, button0) begin
+
+  --  pull up
+  if button0 = '0' and rising_edge(clk) then 
+    disp_state <= disp_nextstate;
+  end if;
+
+end process;
+
+disp_nextstate <= L when disp_state = H else H;
+
+
 process(dip0, dip1, dip2, dip3, dip4, dip5, dip6, dip7)
   -- variables can only be used inside processes 
-  -- TODO: check whether is it right
   variable registers_choice : STD_LOGIC_VECTOR(7 downto 0);
   variable register_choosen : STD_LOGIC_VECTOR(15 downto 0);
 begin
   registers_choice := dip0 & dip1& dip2 & dip3 & dip4 & dip5 & dip6 & dip7;
 
   -- DEBUG 
-  registers(1) <= "0000000000000111";
-  registers(0) <= "0100000000000100";
+  -- registers(1) <= "0111000000000111";
+  -- registers(0) <= "0100000000000100";
   
   -- for now disp only lower bits
   -- 0 when ON
@@ -84,18 +101,28 @@ begin
   end case;
 
   -- disp lb 
-  led0 <= register_choosen(7);
-  led1 <= register_choosen(6);
-  led2 <= register_choosen(5);
-  led3 <= register_choosen(4);
-  led4 <= register_choosen(3);
-  led5 <= register_choosen(2);
-  led6 <= register_choosen(1);
-  led7 <= register_choosen(0);
+  
+  if disp_state = L then 
+     led0 <= register_choosen(7);
+     led1 <= register_choosen(6);
+     led2 <= register_choosen(5);
+     led3 <= register_choosen(4);
+     led4 <= register_choosen(3);
+     led5 <= register_choosen(2);
+     led6 <= register_choosen(1);
+     led7 <= register_choosen(0);
+  else 
+    led0 <= register_choosen(15);
+    led1 <= register_choosen(14);
+    led2 <= register_choosen(13);
+    led3 <= register_choosen(12);
+    led4 <= register_choosen(11);
+    led5 <= register_choosen(10);
+    led6 <= register_choosen(9);
+    led7 <= register_choosen(8);
+  end if;
 
 end process;
-
-
 
 end Behavioral;
 
