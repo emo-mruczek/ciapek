@@ -6,11 +6,11 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 -- as it is a multicycle processor
 -- "After all, RAM and ROM are the same thing in FPGAs, ROM is a RAM that you only read from." 
 entity instruction_data_memory is
-    Port ( ra_in : in  STD_LOGIC_VECTOR (0 downto 15);
-           wd_in : in  STD_LOGIC_VECTOR (0 downto 15);
+    Port ( ra_in : in  STD_LOGIC_VECTOR (15 downto 0);
+           wd_in : in  STD_LOGIC_VECTOR (15 downto 0);
            clk : in  STD_LOGIC;
            we_in : in  STD_LOGIC;
-           rd_out : out  STD_LOGIC_VECTOR (0 downto 15));
+           rd_out : out  STD_LOGIC_VECTOR (15 downto 0));
 end instruction_data_memory;
 
 architecture Behavioral of instruction_data_memory is
