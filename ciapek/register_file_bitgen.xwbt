@@ -1,8 +1,0 @@
-INTSTYLE=ise
-INFILE=/home/felix/prjcts/ciapek/ciapek/register_file.ncd
-OUTFILE=/home/felix/prjcts/ciapek/ciapek/register_file.bit
-FAMILY=Spartan6
-PART=xc6slx9-3csg324
-WORKINGDIR=/home/felix/prjcts/ciapek/ciapek
-LICENSE=WebPack
-USER_INFO=214009259_0_0_516
