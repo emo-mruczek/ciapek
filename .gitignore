@@ -1,0 +1,8 @@
+*
+!Readme.md
+ciapek/*
+!ciapek/
+!ciapek/src/
+!ciapek/src/*
+!.gitignore
+

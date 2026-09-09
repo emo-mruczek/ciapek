@@ -1,0 +1,22 @@
+NET "clk"      LOC = V10 | IOSTANDARD = LVCMOS33 | PERIOD = 100MHz;
+
+NET "dip0"         LOC = C17  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST | PULLUP;
+NET "dip1"         LOC = C18  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST | PULLUP;
+NET "dip2"         LOC = D17  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST | PULLUP; 
+NET "dip3"         LOC = D18  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST | PULLUP; 
+NET "dip4"         LOC = E18  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST | PULLUP; 
+NET "dip5"         LOC = E16  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST | PULLUP; 
+NET "dip6"         LOC = F18  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST | PULLUP; 
+NET "dip7"         LOC = F17  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST | PULLUP; 
+	 
+NET "button0"           LOC = M18   | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST | PULLUP; 
+
+NET "led0"              LOC = P15  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST ;
+NET "led1"              LOC = P16  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST ;
+NET "led2"              LOC = N15  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST ;
+NET "led3"              LOC = N16  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST ;
+NET "led4"              LOC = U17  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST ;
+NET "led5"              LOC = U18  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST ;
+NET "led6"              LOC = T17  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST ;
+NET "led7"              LOC = T18  | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST ;
+
