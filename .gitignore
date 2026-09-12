@@ -2,6 +2,7 @@
 !Readme.md
 ciapek/*
 ciapek/src/work
+*.fst
 !ciapek/
 !ciapek/src/
 !ciapek/src/*

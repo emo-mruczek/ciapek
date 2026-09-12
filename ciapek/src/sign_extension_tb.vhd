@@ -36,8 +36,12 @@ ARCHITECTURE behavior OF sign_extension_tb IS
   constant only_zeros : STD_LOGIC_VECTOR(6 downto 0) := (others => '0');
   constant only_ones : STD_LOGIC_VECTOR(6 downto 0) := (others => '1');
   constant only_ones_result : STD_LOGIC_VECTOR(15 downto 0) := (others => '1');
-  constant one_extend : STD_LOGIC_VECTOR(6 downto 0) := "0000001";
+  constant only_zeros_result : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+  constant one_extend : STD_LOGIC_VECTOR(6 downto 0) := "1000000";
   constant one_extend_result : STD_LOGIC_VECTOR(15 downto 0) := "1111111111000000";
+  constant zero_extend : STD_LOGIC_VECTOR(6 downto 0) := "0111111";
+  constant zero_extend_result : STD_LOGIC_VECTOR(15 downto 0) := "0000000000111111";
+
   
   ----------
   
@@ -62,19 +66,31 @@ BEGIN
 
       -----------------------
 
-      --- only zeros
+      --- only ones
       input <= only_ones; 
       wait for 10 ns;
-      assert output = only_ones_result report "Wrong extension: only zeros" severity FAILURE;
+      assert output = only_ones_result report "Wrong extension: only ones" severity FAILURE;
 
-      --- only ones
-    
+      --- only zeros
+
+      input <= only_zeros; 
+      wait for 10 ns;
+      assert output = only_zeros_result report "Wrong extension: only zeros" severity FAILURE;
+
 
       --- one extend 
 
+      input <= one_extend; 
+      wait for 10 ns;
+      assert output = one_extend_result report "Wrong extension: one" severity FAILURE;
+
+      -- zero extend
 
 
-      --- zero extend
+      input <= zero_extend; 
+      wait for 10 ns;
+      assert output = zero_extend_result report "Wrong extension: zero" severity FAILURE;
+
 
 
       report "!!!!!!! Everything's fine !!!!!!";
