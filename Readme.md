@@ -9,21 +9,31 @@ Even tho I have no prior experience in CPU design or any HDL, I've decided to ma
 
 Why 16-bit? Because everyone else does 8 or 32 or 64. Why MIPS? Because the aforementioned book uses it as an example. Why MimasV2? Because this was the cheapest second-hand discovery board I've found. Why VHDL? Because I like verbosity and Ada.
 
+No AI was used while making this project. It was made for fun and learn, so AI usaged would be pointless.
+
 ### Part 1 - can i even flash my FPGA on NixOs?
 
 ### Part 2 - constructing an ISA for 16-bit datapath
 
 ### Part 3 - state elements
 
-### Part 4 - generic building blocks 
+#### Register file
+
+nvc
+
+#### Instructions and data memory
+
+### Part 4 - generic building blocks
 
 ### Part 5 -  
 
 ##### TODO
 
-- [ ] debouncing pushbutton 
-- [ ] ~making normaln gitignore~ add for nvc files 
+- [ ] debouncing pushbutton
+- [X] ~making normaln gitignore~ add for nvc files
 - [ ] this README
 - [ ] formatter
-- [ ] fix memory 
+- [ ] fix memory
 - [ ] memory from .mem file
+- [ ] justfile for running testbenches
+- [ ] nix shell

@@ -1,23 +1,4 @@
 --------------------------------------------------------------------------------
--- Company: 
--- Engineer:
---
--- Create Date:   11:20:25 09/12/2026
--- Design Name:   
--- Module Name:   /home/felix/prjcts/ciapek/ciapek/sign_extension_tb.vhd
--- Project Name:  ciapek
--- Target Device:  
--- Tool versions:  
--- Description:   
--- 
--- VHDL Test Bench Created by ISE for module: sign_extension
--- 
--- Dependencies:
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
 -- Notes: 
 -- This testbench has been automatically generated using types std_logic and
 -- std_logic_vector for the ports of the unit under test.  Xilinx recommends
@@ -27,10 +8,6 @@
 --------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
- 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
  
 ENTITY sign_extension_tb IS
 END sign_extension_tb;
@@ -52,10 +29,18 @@ ARCHITECTURE behavior OF sign_extension_tb IS
 
  	--Outputs
    signal output : std_logic_vector(15 downto 0);
-   -- No clocks detected in port list. Replace <clock> below with 
-   -- appropriate port name 
- 
-   constant <clock>_period : time := 10 ns;
+
+
+  ----------
+  
+  constant only_zeros : STD_LOGIC_VECTOR(6 downto 0) := (others => '0');
+  constant only_ones : STD_LOGIC_VECTOR(6 downto 0) := (others => '1');
+  constant only_ones_result : STD_LOGIC_VECTOR(15 downto 0) := (others => '1');
+  constant one_extend : STD_LOGIC_VECTOR(6 downto 0) := "0000001";
+  constant one_extend_result : STD_LOGIC_VECTOR(15 downto 0) := "1111111111000000";
+  
+  ----------
+  
  
 BEGIN
  
@@ -65,15 +50,6 @@ BEGIN
           output => output
         );
 
-   -- Clock process definitions
-   <clock>_process :process
-   begin
-		<clock> <= '0';
-		wait for <clock>_period/2;
-		<clock> <= '1';
-		wait for <clock>_period/2;
-   end process;
- 
 
    -- Stimulus process
    stim_proc: process
@@ -81,9 +57,31 @@ BEGIN
       -- hold reset state for 100 ns.
       wait for 100 ns;	
 
-      wait for <clock>_period*10;
 
       -- insert stimulus here 
+
+      -----------------------
+
+      --- only zeros
+      input <= only_ones; 
+      wait for 10 ns;
+      assert output = only_ones_result report "Wrong extension: only zeros" severity FAILURE;
+
+      --- only ones
+    
+
+      --- one extend 
+
+
+
+      --- zero extend
+
+
+      report "!!!!!!! Everything's fine !!!!!!";
+
+      -----------------------
+
+
 
       wait;
    end process;

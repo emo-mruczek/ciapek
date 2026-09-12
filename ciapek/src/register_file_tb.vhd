@@ -180,10 +180,11 @@ BEGIN
       assert rd1_out = reg2_val report "Wrong value: reg2" severity FAILURE;
       assert rd2_out = reg4_val report "Wrong value: reg4" severity FAILURE;
 
-      ---------------------------
 
       report "!!!!!!! Everything's fine !!!!!!";
       sim_end <= '1';
+
+      ---------------------------
 
       wait;
    end process;

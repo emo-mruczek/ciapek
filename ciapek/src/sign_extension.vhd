@@ -12,13 +12,8 @@ end sign_extension;
 architecture Behavioral of sign_extension is
 
 begin
+
+output <=  "000000000" & input when input(6) = '0' else "111111111" & input;
   
-  if input(6) = '0' then 
-    output <= "000000000" & a;
-  else 
-    output <= "111111111" & a;
-  end if;
-
-
 end Behavioral;
 

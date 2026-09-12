@@ -1,23 +1,4 @@
 --------------------------------------------------------------------------------
--- Company: 
--- Engineer:
---
--- Create Date:   11:16:46 09/12/2026
--- Design Name:   
--- Module Name:   /home/felix/prjcts/ciapek/ciapek/adder_tb.vhd
--- Project Name:  ciapek
--- Target Device:  
--- Tool versions:  
--- Description:   
--- 
--- VHDL Test Bench Created by ISE for module: adder
--- 
--- Dependencies:
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
 -- Notes: 
 -- This testbench has been automatically generated using types std_logic and
 -- std_logic_vector for the ports of the unit under test.  Xilinx recommends
@@ -54,10 +35,15 @@ ARCHITECTURE behavior OF adder_tb IS
 
  	--Outputs
    signal output : std_logic_vector(15 downto 0);
-   -- No clocks detected in port list. Replace <clock> below with 
-   -- appropriate port name 
- 
-   constant <clock>_period : time := 10 ns;
+
+  ----------
+  
+  constant zero : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+  constant one : STD_LOGIC_VECTOR(15 downto 0) := "0000000000000001";
+  constant two : STD_LOGIC_VECTOR(15 downto 0) := "0000000000000010";
+  
+
+  ----------
  
 BEGIN
  
@@ -68,15 +54,6 @@ BEGIN
           output => output
         );
 
-   -- Clock process definitions
-   <clock>_process :process
-   begin
-		<clock> <= '0';
-		wait for <clock>_period/2;
-		<clock> <= '1';
-		wait for <clock>_period/2;
-   end process;
- 
 
    -- Stimulus process
    stim_proc: process
@@ -84,9 +61,24 @@ BEGIN
       -- hold reset state for 100 ns.
       wait for 100 ns;	
 
-      wait for <clock>_period*10;
-
       -- insert stimulus here 
+      -----------------------
+
+      --- 1 + 0 = 1
+      a_in <= zero;
+      b_in <= one;
+      wait for 10 ns;
+      assert output = one report "Wrong value: 1 + 0 != 1" severity FAILURE;
+
+      --- 1 + 1 = 2
+      a_in <= one;
+      wait for 10 ns;
+      assert output = two report "Wrong value: 1 + 1 != 2" severity FAILURE;
+
+
+      report "!!!!!!! Everything's fine !!!!!!";
+
+      -----------------------
 
       wait;
    end process;
