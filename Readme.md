@@ -35,5 +35,5 @@ nvc
 - [ ] formatter
 - [ ] fix memory
 - [ ] memory from .mem file
-- [ ] justfile for running testbenches
-- [ ] nix shell (just, nvc, gtkwave)
+- [X] justfile for running testbenches
+- [X] nix shell (just, nvc, gtkwave)
