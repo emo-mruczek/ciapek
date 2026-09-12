@@ -7,4 +7,6 @@ ciapek/src/work
 !ciapek/src/
 !ciapek/src/*
 !.gitignore
-
+!.envrc
+!shell.nix
+!justfile
