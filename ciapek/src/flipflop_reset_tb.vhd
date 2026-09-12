@@ -1,23 +1,4 @@
 --------------------------------------------------------------------------------
--- Company: 
--- Engineer:
---
--- Create Date:   11:18:53 09/12/2026
--- Design Name:   
--- Module Name:   /home/felix/prjcts/ciapek/ciapek/flipflop_reset_tb.vhd
--- Project Name:  ciapek
--- Target Device:  
--- Tool versions:  
--- Description:   
--- 
--- VHDL Test Bench Created by ISE for module: flipflop_reset
--- 
--- Dependencies:
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
 -- Notes: 
 -- This testbench has been automatically generated using types std_logic and
 -- std_logic_vector for the ports of the unit under test.  Xilinx recommends
@@ -27,10 +8,6 @@
 --------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
- 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
  
 ENTITY flipflop_reset_tb IS
 END flipflop_reset_tb;
@@ -43,8 +20,8 @@ ARCHITECTURE behavior OF flipflop_reset_tb IS
     PORT(
          clk : IN  std_logic;
          reset : IN  std_logic;
-         input : IN  std_logic_vector(0 to 15);
-         output : OUT  std_logic_vector(0 to 15)
+         input : IN  std_logic_vector(15 downto 0);
+         output : OUT  std_logic_vector(15 downto 0)
         );
     END COMPONENT;
     
@@ -52,13 +29,25 @@ ARCHITECTURE behavior OF flipflop_reset_tb IS
    --Inputs
    signal clk : std_logic := '0';
    signal reset : std_logic := '0';
-   signal input : std_logic_vector(0 to 15) := (others => '0');
+   signal input : std_logic_vector(15 downto 0) := (others => '0');
 
  	--Outputs
-   signal output : std_logic_vector(0 to 15);
+   signal output : std_logic_vector(15 downto 0);
+
+ -- end of sim 
+  signal sim_end : STD_LOGIC := '0';
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
+
+
+  ---------
+
+   constant reset_val : STD_LOGIC_VECTOR(15 downto 0) := "0000000000000000";
+    constant val1 : STD_LOGIC_VECTOR(15 downto 0) := "0000000000001110";
+    constant val2 : STD_LOGIC_VECTOR(15 downto 0) := "0000000000011100";
+
+  ----------
  
 BEGIN
  
@@ -70,15 +59,19 @@ BEGIN
           output => output
         );
 
-   -- Clock process definitions
-   clk_process :process
-   begin
-		clk <= '0';
-		wait for clk_period/2;
-		clk <= '1';
-		wait for clk_period/2;
-   end process;
- 
+ -- Clock process definitions
+  clk_process :process
+    begin
+
+      if sim_end = '0' then 
+      clk <= '0';
+      wait for clk_period/2;
+      clk <= '1';
+      wait for clk_period/2;
+    else 
+      wait;
+    end if;
+end process;
 
    -- Stimulus process
    stim_proc: process
@@ -90,6 +83,46 @@ BEGIN
 
       -- insert stimulus here 
 
+      -------------
+
+      reset <= '0';
+
+      -- set value
+
+      input <= val1;
+      wait for clk_period;
+
+      assert output = val1 report "Not set val1" severity FAILURE; 
+
+      --- input without reset 
+
+      input <= val2;
+     wait for clk_period;
+
+      assert output = val2 report "Not set val2" severity FAILURE; 
+
+
+      --- reset 
+
+      reset <= '1';
+      wait for clk_period;
+      
+      assert output = reset_val report "Did not reset" severity FAILURE;
+
+      -- holding reset 
+
+      reset <= '1';
+      input <= val1;
+      wait for clk_period;
+
+       assert output = reset_val report "Did not hold reset" severity FAILURE;
+
+
+      
+      report "!!!!!!! Everything's fine !!!!!!";
+      sim_end <= '1';
+
+      ---------------------------
       wait;
    end process;
 

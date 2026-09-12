@@ -8,8 +8,8 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 entity flipflop_reset is
     Port ( clk : in  STD_LOGIC;
            reset : in  STD_LOGIC;
-           input : in  STD_LOGIC_VECTOR (0 downto 15);
-           output : out  STD_LOGIC_VECTOR (0 downto 15));
+           input : in  STD_LOGIC_VECTOR (15 downto 0);
+           output : out  STD_LOGIC_VECTOR (15 downto 0));
 end flipflop_reset;
 
 architecture Behavioral of flipflop_reset is
