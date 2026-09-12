@@ -3,7 +3,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 
--- TODO: testbench
 -- simple resettable flip-flop used as a register
 entity flipflop_reset is
     Port ( clk : in  STD_LOGIC;
