@@ -10,3 +10,4 @@ ciapek/src/work
 !.envrc
 !shell.nix
 !justfile
+ciapek/src/*.fst
