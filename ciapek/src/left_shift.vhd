@@ -5,6 +5,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 -- used to multiply by 4
 -- TODO: checkagain after implementing PC and memory
 -- whether multiply by 4 is correct
+-- if not, fix also the testbench file
 -- TODO: testbench
 entity left_shift is
     Port ( input : in  STD_LOGIC_VECTOR (15 downto 0);
