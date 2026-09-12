@@ -1,8 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- TODO testbench
-
 entity multiplexer_four is
     Port ( d0_in : in  STD_LOGIC_VECTOR (15 downto 0);
            d1_in : in  STD_LOGIC_VECTOR (15 downto 0);

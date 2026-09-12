@@ -1,23 +1,4 @@
 --------------------------------------------------------------------------------
--- Company: 
--- Engineer:
---
--- Create Date:   11:19:47 09/12/2026
--- Design Name:   
--- Module Name:   /home/felix/prjcts/ciapek/ciapek/multiplexer_four_tb.vhd
--- Project Name:  ciapek
--- Target Device:  
--- Tool versions:  
--- Description:   
--- 
--- VHDL Test Bench Created by ISE for module: multiplexer_four
--- 
--- Dependencies:
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
 -- Notes: 
 -- This testbench has been automatically generated using types std_logic and
 -- std_logic_vector for the ports of the unit under test.  Xilinx recommends
@@ -60,10 +41,16 @@ ARCHITECTURE behavior OF multiplexer_four_tb IS
 
  	--Outputs
    signal output : std_logic_vector(15 downto 0);
-   -- No clocks detected in port list. Replace <clock> below with 
-   -- appropriate port name 
- 
-   constant <clock>_period : time := 10 ns;
+
+  ----------
+  
+  constant zero_result : STD_LOGIC_VECTOR(15 downto 0) := "0000000000000001";
+  constant one_result : STD_LOGIC_VECTOR(15 downto 0) := "0000000000000010";
+  constant two_result : STD_LOGIC_VECTOR(15 downto 0) := "0000000000000011";
+  constant three_result : STD_LOGIC_VECTOR(15 downto 0) := "0000000000000100";
+
+  ----------
+   
  
 BEGIN
  
@@ -77,15 +64,6 @@ BEGIN
           output => output
         );
 
-   -- Clock process definitions
-   <clock>_process :process
-   begin
-		<clock> <= '0';
-		wait for <clock>_period/2;
-		<clock> <= '1';
-		wait for <clock>_period/2;
-   end process;
- 
 
    -- Stimulus process
    stim_proc: process
@@ -93,9 +71,45 @@ BEGIN
       -- hold reset state for 100 ns.
       wait for 100 ns;	
 
-      wait for <clock>_period*10;
-
       -- insert stimulus here 
+
+      --------------
+
+      d0_in <= zero_result;
+      d1_in <= one_result;
+      d2_in <= two_result;
+      d3_in <= three_result;
+
+      -- choose 0
+    
+      s_in <= "00"; 
+      wait for 10 ns;
+      assert output = zero_result report "Wrong choice: 0" severity FAILURE;
+
+      -- choose 1
+
+      s_in <= "01"; 
+      wait for 10 ns;
+      assert output = one_result report "Wrong choice: 1" severity FAILURE;
+
+      -- choose 2
+
+      s_in <= "10"; 
+      wait for 10 ns;
+      assert output = two_result report "Wrong choice: 1" severity FAILURE;
+
+
+      -- choose 3
+
+      s_in <= "11"; 
+      wait for 10 ns;
+      assert output = three_result report "Wrong choice: 1" severity FAILURE;
+
+
+
+      report "!!!!!!! Everything's fine !!!!!!";
+
+      -------------
 
       wait;
    end process;

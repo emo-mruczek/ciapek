@@ -36,4 +36,4 @@ nvc
 - [ ] fix memory
 - [ ] memory from .mem file
 - [ ] justfile for running testbenches
-- [ ] nix shell
+- [ ] nix shell (just, nvc, gtkwave)

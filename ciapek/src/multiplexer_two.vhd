@@ -2,7 +2,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 -- simple multiplexer with two inputs 
--- TODO: testbench
 entity multiplexer_two is
     Port ( d0_in : in  STD_LOGIC_VECTOR (15 downto 0);
            d1_in : in  STD_LOGIC_VECTOR (15 downto 0);
