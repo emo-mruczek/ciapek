@@ -3,16 +3,16 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- TODO testbench
 
-entity multiplexer_4 is
+entity multiplexer_four is
     Port ( d0_in : in  STD_LOGIC_VECTOR (15 downto 0);
            d1_in : in  STD_LOGIC_VECTOR (15 downto 0);
            d2_in : in  STD_LOGIC_VECTOR (15 downto 0);
            d3_in : in  STD_LOGIC_VECTOR (15 downto 0);
            s_in : in  STD_LOGIC_VECTOR (1 downto 0);
            output : out  STD_LOGIC_VECTOR (15 downto 0));
-end multiplexer_4;
+end multiplexer_four;
 
-architecture Behavioral of multiplexer_4 is
+architecture Behavioral of multiplexer_four is
 
 begin
 
