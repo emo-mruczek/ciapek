@@ -24,7 +24,6 @@ architecture Behavioral of ALU is
 
 begin
 
--- TODO: is it correct?
 process(control_in, srca_in, srcb_in)
 
 begin
@@ -39,14 +38,17 @@ case control_in is
     -- when "101" -- NOR 
     -- when "110" -- SUB 
     -- when "111" -- SLT
-    when others =>  op_result <= exception;
+when others =>  op_result <= exception; -- TODO: this may probably break something, but alu_ctr should always be correct, so only at the beggining it may be wrong - if someting break on datapath, i should check this firstly
 
 end case;
 
+end process;
+
+-- SIGNAL ASSIGMENT takes place after process suspension !!!!
+
+result_out <= op_result;
 zero_flag_out <= '1' when result_out = zero else '0';
 
-
-end process;
 
 end Behavioral;
 
