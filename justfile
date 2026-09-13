@@ -3,3 +3,6 @@ tb NAME:
 
 wave NAME:
   gtkwave ciapek/tb/{{NAME}}.fst
+
+clean:
+  rm -rf *.fst work ciapek/work ciapek/src/work ciapek/tb/work
