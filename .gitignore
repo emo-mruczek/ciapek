@@ -6,6 +6,8 @@ ciapek/src/work
 !ciapek/
 !ciapek/src/
 !ciapek/src/*
+!ciapek/tb
+!ciapek/tb/*
 !.gitignore
 !.envrc
 !shell.nix
