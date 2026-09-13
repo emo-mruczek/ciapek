@@ -44,8 +44,15 @@ ARCHITECTURE behavior OF ALU_tb IS
   constant one : STD_LOGIC_VECTOR(15 downto 0) := "0000000000000001";
   constant two : STD_LOGIC_VECTOR(15 downto 0) := "0000000000000010";
   constant three : STD_LOGIC_VECTOR(15 downto 0) := "0000000000000011";
+  constant nor_res: STD_LOGIC_VECTOR(15 downto 0) := "1111111111111100";
 
   constant ctr_add: STD_LOGIC_VECTOR(2 downto 0) := "010";
+  constant ctr_or: STD_LOGIC_VECTOR(2 downto 0) := "001";
+  constant ctr_and: STD_LOGIC_VECTOR(2 downto 0) := "000";
+  constant ctr_xor: STD_LOGIC_VECTOR(2 downto 0) := "100";
+  constant ctr_nor: STD_LOGIC_VECTOR(2 downto 0) := "101";
+  constant ctr_sub: STD_LOGIC_VECTOR(2 downto 0) := "110";
+  constant ctr_slt: STD_LOGIC_VECTOR(2 downto 0) := "111";
   ----------
  
 BEGIN
@@ -86,6 +93,95 @@ BEGIN
       wait for 10 ns;
       assert result_out = zero report "Wrong value: 0 + 0 != 0" severity FAILURE;
       assert zero_flag_out = '1' report "Wrong zero flag: 0 + 0 zero 0" severity FAILURE; 
+
+
+      --- 2 and 3 = 2 zero 0
+      srca_in <= two;
+      srcb_in <= three;
+      control_in <= ctr_and;
+      wait for 10 ns;
+      assert result_out = two report "Wrong value: 2 and 3 != 2" severity FAILURE;
+      assert zero_flag_out = '0' report "Wrong zero flag: 2 and 3 zero 1" severity FAILURE; 
+
+      --- 2 or 3 = 3 zero 0
+
+      srca_in <= two;
+      srcb_in <= three;
+      control_in <= ctr_or;
+      wait for 10 ns;
+      assert result_out = three report "Wrong value: 2 or 3 != 3" severity FAILURE;
+      assert zero_flag_out = '0' report "Wrong zero flag: 2 or 3 zero 1" severity FAILURE;
+
+
+      --- 2 xor 3 = 1 zero 0
+      srca_in <= two;
+      srcb_in <= three;
+      control_in <= ctr_xor;
+      wait for 10 ns;
+      assert result_out = one report "Wrong value: 2 xor 3 != 1" severity FAILURE;
+      assert zero_flag_out = '0' report "Wrong zero flag: 2 xor 3 zero 1" severity FAILURE; 
+
+      --- 2 nor 3 = !3 zero 0
+
+      srca_in <= two;
+      srcb_in <= three;
+      control_in <= ctr_nor;
+      wait for 10 ns;
+      assert result_out = nor_res report "Wrong value: 2 nor 3 != not 3" severity FAILURE;
+      assert zero_flag_out = '0' report "Wrong zero flag: 2 nor 3 zero 1" severity FAILURE; 
+
+      -- TODO: what would happen if undevflow? what if overflow?
+
+      --- 3 - 2 = 1 zero 0
+
+      srca_in <= three;
+      srcb_in <= two;
+      control_in <= ctr_sub;
+      wait for 10 ns;
+      assert result_out = one report "Wrong value: 3 - 2 != 1" severity FAILURE;
+      assert zero_flag_out = '0' report "Wrong zero flag: 3 - 2 zero 1" severity FAILURE; 
+
+      --- 3 - 3 = 0 zero 1
+
+      srca_in <= three;
+      srcb_in <= three;
+      control_in <= ctr_sub;
+      wait for 10 ns;
+      assert result_out = zero report "Wrong value: 3 - 3 != 0" severity FAILURE;
+      assert zero_flag_out = '1' report "Wrong zero flag: 3 - 3 zero 0" severity FAILURE; 
+
+      --- 2 slt 3 = 1 zero 0
+
+      srca_in <= two;
+      srcb_in <= three;
+      control_in <= ctr_slt;
+      wait for 10 ns;
+      assert result_out = one report "Wrong value: 2 slt 3 != 1" severity FAILURE;
+      assert zero_flag_out = '0' report "Wrong zero flag: 2 slt 3 zero 1" severity FAILURE; 
+
+
+      --- 3 slt 2 = 0 zero 1
+
+      srca_in <= three;
+      srcb_in <= two;
+      control_in <= ctr_slt;
+      wait for 10 ns;
+      assert result_out = zero report "Wrong value: 3 slt 2 != 0" severity FAILURE;
+      assert zero_flag_out = '1' report "Wrong zero flag: 3 slt 2 zero 0" severity FAILURE; 
+
+      --- 3 slt 3 = 0 zero 1
+
+      srca_in <= three;
+      srcb_in <= three;
+      control_in <= ctr_slt;
+      wait for 10 ns;
+      assert result_out = zero report "Wrong value: 3 slt 3 != 0" severity FAILURE;
+      assert zero_flag_out = '1' report "Wrong zero flag: 3 slt 3 zero 0" severity FAILURE; 
+
+
+      
+      
+  
 
       report "!!!!!!! Everything's fine !!!!!!";
 

@@ -21,6 +21,7 @@ architecture Behavioral of ALU is
   
   constant exception : STD_LOGIC_VECTOR(15 downto 0) := (others => 'X');
   constant zero : STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
+  constant one : STD_LOGIC_VECTOR (15 downto 0) := "0000000000000001";
 
 begin
 
@@ -30,15 +31,15 @@ begin
 
 case control_in is 
 
-    -- when "000" -- AND 
-    -- when "001" -- OR 
+    when "000" => op_result <= srca_in AND srcb_in; -- AND 
+    when "001" => op_result <= srca_in OR srcb_in; -- OR 
     when "010" => op_result <= srca_in + srcb_in ; -- ADD 
-    -- when "011" -- n/a
-    -- when "100" -- XOR  
-    -- when "101" -- NOR 
-    -- when "110" -- SUB 
-    -- when "111" -- SLT
-when others =>  op_result <= exception; -- TODO: this may probably break something, but alu_ctr should always be correct, so only at the beggining it may be wrong - if someting break on datapath, i should check this firstly
+    when "011" => op_result <= exception; -- n/a
+    when "100" => op_result <= srca_in XOR srcb_in; -- XOR  
+    when "101" => op_result <= srca_in NOR srcb_in; -- NOR 
+    when "110" => op_result <= srca_in - srcb_in; -- SUB 
+    when "111" => op_result <= one when srca_in < srcb_in else zero ; -- SLT set if less than
+    when others =>  op_result <= exception; -- this may probably break something, but alu_ctr should always be correct, so only at the beggining it may be wrong - if someting break on datapath, i should check this firstly
 
 end case;
 

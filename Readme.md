@@ -55,3 +55,4 @@ I've partially reused ALU codes from book, replacing two operations with XOR and
 - [ ] memory from .mem file
 - [X] justfile for running testbenches
 - [X] nix shell (just, nvc, gtkwave)
+- [ ] what about overflow/underflow?
