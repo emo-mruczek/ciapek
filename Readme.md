@@ -13,19 +13,31 @@ No AI was used while making this project. It was made for fun and learn, so AI u
 
 ### Part 1 - can i even flash my FPGA on NixOs?
 
+Surprisingly - yes. Not without a little bit of trickery, but yes.
+As I am aware of, I cannot really make a bin file for MimasV2 on Xilinx Vivado and I have to use an old Xilinx ISE. I had to unpack the .exe and patch the file located in ise/14.7/ISE_DS/ISE/bin/lin64/ise with pachelf (also ldd is your friend). Surprisingly, after that, running this file simply works???
+The .ucf files can be find in repo (probably an official one?) with sample code for MimasV2. There is also "Downloads" section at [NumatoLab's site](https://numato.com/product/mimas-v2-spartan-6-fpga-development-board-with-ddr-sdram#downloads) with .ucf and manual (with pinout).
+Handy websites: [using ISE](https://langster1980.blogspot.com/2014/12/numato-mima-v2-tutorial.html) [running ISE & flashing on Linux](https://ewen.mcneill.gen.nz/blog/entry/2017-03-06-numato-mimas-v2-from-linux/)
+The second step was flashing the FPGA, but above link explains it well. Python package can be found [there (ig it's official numato's repo?)](https://github.com/numato/samplecode/tree/master/FPGA/MimasV2/tools/configuration/python). On NixOS, running this with just python command works, no shell is necessary.
+
+
 ### Part 2 - constructing an ISA for 16-bit datapath
 
 ### Part 3 - state elements
 
+State elements consists of memories (so in multicycle processor, combined instruction and data memory) and an architectural state (program counter and registers). I've actually only implemented the register file before doing the part 4 and 5, but shhhh...
+
 #### Register file
 
-nvc
+
+
 
 #### Instructions and data memory
 
 ### Part 4 - generic building blocks
 
-### Part 5 -  
+
+
+### Part 5 -  ALU
 
 ##### TODO
 
