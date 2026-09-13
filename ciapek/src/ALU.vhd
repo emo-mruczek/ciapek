@@ -2,7 +2,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
--- TODO: testbench
 -- MIPS does not provide a NOT instruction, but A NOR $0 = NOT
 --A, so the NOR instruction can substitute.
 
