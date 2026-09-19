@@ -2,7 +2,8 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL; 
 
--- i do not like the way it is implemented...
+-- TODO: testbench
+--  TODO: word-aligment handling
 
 -- instruction and data memory as one module
 -- as it is a multicycle processor
@@ -24,8 +25,9 @@ type ram_type is array (0 to 511) of STD_LOGIC_VECTOR (7 downto 0);
 
 ---------- INSTRUCTIONS ------
 
--- instruction can have a maximum size of 128 TODO: how to determine whether i can use the offsett?
-constant INSTRUCTIONS_MAX : INTEGER := 128;
+-- instruction can have a maximum size of 128
+
+constant INSTRUCTIONS_MAX : INTEGER := 256; -- TODO: redundant
 
 signal memory: ram_type := (
   0 => "11111111",
@@ -50,8 +52,12 @@ begin
 
   -- the input is an address and whether it is a addres to read from or to store from
   -- read from: if it is a instruction, the PC knows the address, if RAM, the programmer must know the address to use (no offset for instructions is implemented).
+-- programmer rn MUST be aware of the byte-addressing of the memory
+-- lw gives the sign-extended immediate address, so the read must account for this fact
+-- lw and sw provides 
 
   address <= CONV_INTEGER(ra_in); -- TODO: all bits? immediate is only 7 bits so prob i can use this
+-- TODO: how many addresses can this immediate actually handle & adjust the memory size accordingly
 
     -- writting only on a rising edge of a clock
     process(clk)is 
@@ -60,21 +66,22 @@ begin
     if clk'event and clk = '1' then 
       if (we_in = '1') then 
         memory(address) <= wd_in(15 downto 8);
-        memory(address) <= wd_in(7 downto 0);
+        memory(address + 1) <= wd_in(7 downto 0);
       end if;
     end if;
     end process;
 
     -- value under address always out, insensitive to clk 
-    process(ra_in) is 
-    begin 
+    -- process(ra_in) is 
+    -- begin 
       rd_out <= memory(address) & memory(address + 1);
-    end process;
+    -- end process;
   
 end Behavioral;
 
 
 -- so next instruction is prev + 2
 -- pc stores addres of the prev instruction so it holds this mem 
+-- and lw and sw are 1. word-aligned 2. uses reg with offset
 
 

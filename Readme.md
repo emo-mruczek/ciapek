@@ -77,10 +77,12 @@ State elements consists of memories (so in multicycle processor, combined instru
 
 TODO
 
+prob need to add the 0 reg (with 0 val), the 9 reg (with offset), and 1-8 gen purp reg
+
 
 #### Instructions and data memory
 
-This gets a little more complicated in multicycle, as I can make it as a one component. So now, bots the intructions and the RAM shares the same space. It makes it a little bit messy - currently, the first addresses are occupied by intructions, and the rest is reserved for RAM. ~This makes it a little bit silly, as the instructions space is not read-only.~ ~However, I've hardcoded the maximum size for the instructions - 128 bytes. This allows me to "translate" the given address from instruction to it's true address, and the programmer can use 0 - [??] addresses, and each address true address will be adjusted by offset [TODO: fix this description its very wonky]~  ~The program also must be hard-coded in the VHDL, and the programmer must be aware when does the instructions ends.~ Right now, I don't have an idea how to implement the read-only instruction memory. I think i can use the fact that the source of address input value is a multiplexer, and have some signal or sth that would decide wether it is a instruction address or data address.
+This gets a little more complicated in multicycle, as I can make it as a one component. So now, bots the intructions and the RAM shares the same space. It makes it a little bit messy - currently, the first addresses are occupied by intructions, and the rest is reserved for RAM. ~This makes it a little bit silly, as the instructions space is not read-only.~ ~However, I've hardcoded the maximum size for the instructions - 128 bytes. This allows me to "translate" the given address from instruction to it's true address, and the programmer can use 0 - [??] addresses, and each address true address will be adjusted by offset [TODO: fix this description its very wonky]~  ~The program also must be hard-coded in the VHDL, and the programmer must be aware when does the instructions ends.~ ~Right now, I don't have an idea how to implement the read-only instruction memory. I think i can use the fact that the source of address input value is a multiplexer, and have some signal or sth that would decide wether it is a instruction address or data address.~ Ok so the problem was that i cannot read and i didn't understand how the sw and lw worked.
 
 TODO PC and mem
 
@@ -141,3 +143,4 @@ TODO
 - [ ] better data handling (instructions, data) (offset, load from file?) (do not write in the instruction space)
 - [ ] a way to reset the CPU (button)
 - [ ] HALT instruction
+- [ ] get rid of std_logic_unsigned

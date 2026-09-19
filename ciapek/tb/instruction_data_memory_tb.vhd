@@ -8,6 +8,7 @@
 --------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
+USE IEEE.NUMERIC_STD.ALL;
  
  
 ENTITY instruction_data_memory_tb IS
@@ -79,6 +80,35 @@ BEGIN
       -- insert stimulus here 
 
       -------------------------
+
+      -- TODO: this tb depends on hardcoded memory value:
+        -- signal memory: ram_type := (
+        --  0 => "11111111",
+        --   1 => "10101010", 
+        --  others => (others => '0') 
+        -- );
+
+      ---- quick read check from constant written data into instructions
+      -- TODO: an actuall testbench
+      
+      ra_in <= "0000000000000000"; -- simulating sign-extension
+      wait for clk_period;
+      assert rd_out = "1111111110101010" report "Wrong value: address 0" severity FAILURE;
+
+      -- load something to 2 address of RAM
+      -- assuming the sw has correct offset
+     
+      -- https://electronics.stackexchange.com/questions/4482/vhdl-converting-from-an-integer-type-to-a-std-logic-vector
+      ra_in <= STD_LOGIC_VECTOR(TO_UNSIGNED((2 + 256), ra_in'length)); 
+      wait for clk_period;
+      assert rd_out = "0000000000000000" report "Wrong value: address 2 + 256" severity FAILURE;
+      
+      we_in <= '1';
+      wd_in <= "1110001100011100";
+      wait for clk_period;
+      we_in <= '0';
+      assert rd_out = "1110001100011100" report "Wrong value: address 2 + 256 after write" severity FAILURE;
+
 
       report "!!!!!!! Everything's fine !!!!!!";
       sim_end <= '1';
