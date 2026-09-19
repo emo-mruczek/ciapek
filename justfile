@@ -5,4 +5,4 @@ wave NAME:
   gtkwave {{NAME}}_tb.fst
 
 clean:
-  rm -rf *.fst work ciapek/work ciapek/src/work ciapek/tb/work
+  rm -rf *.fst work ciapek/work ciapek/src/work ciapek/tb/work 

@@ -1,23 +1,4 @@
 --------------------------------------------------------------------------------
--- Company: 
--- Engineer:
---
--- Create Date:   11:19:14 09/12/2026
--- Design Name:   
--- Module Name:   /home/felix/prjcts/ciapek/ciapek/instruction_data_memory_tb.vhd
--- Project Name:  ciapek
--- Target Device:  
--- Tool versions:  
--- Description:   
--- 
--- VHDL Test Bench Created by ISE for module: instruction_data_memory
--- 
--- Dependencies:
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
 -- Notes: 
 -- This testbench has been automatically generated using types std_logic and
 -- std_logic_vector for the ports of the unit under test.  Xilinx recommends
@@ -28,9 +9,6 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
  
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
  
 ENTITY instruction_data_memory_tb IS
 END instruction_data_memory_tb;
@@ -61,6 +39,9 @@ ARCHITECTURE behavior OF instruction_data_memory_tb IS
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
+
+ -- end of sim 
+  signal sim_end : STD_LOGIC := '0';
  
 BEGIN
  
@@ -76,10 +57,14 @@ BEGIN
    -- Clock process definitions
    clk_process :process
    begin
-		clk <= '0';
-		wait for clk_period/2;
-		clk <= '1';
-		wait for clk_period/2;
+		if sim_end = '0' then 
+      clk <= '0';
+      wait for clk_period/2;
+      clk <= '1';
+      wait for clk_period/2;
+    else 
+      wait;
+    end if;
    end process;
  
 
@@ -92,6 +77,13 @@ BEGIN
       wait for clk_period*10;
 
       -- insert stimulus here 
+
+      -------------------------
+
+      report "!!!!!!! Everything's fine !!!!!!";
+      sim_end <= '1';
+
+      ---------------------------
 
       wait;
    end process;
