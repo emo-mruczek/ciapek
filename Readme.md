@@ -51,13 +51,13 @@ OP - REG - REG - IMM
  3 -  3  -  3  -  7
 
 
-| Instruction | Opcode | Comments   | Controls | Implemented |
-|-------------|-------|------------|----------|-------------|
-| LW         | ???  |    |          | NO         |
-| SW          | ???   |    |          | NO       |
-| ADDI         | ???   |    |          | NO         |
-| BEQ         | ???   |    |          | NO        |
-| BNE         | ???   |    |          | NO        |
+| Instruction|Opcode| Comments   | Controls | Implemented |
+|------------|------|------------|----------|-------------|
+| LW         | 001  |    |          | NO         |
+| SW         | 010  |    |          | NO       |
+| ADDI       | ???  |    |          | NO         |
+| BEQ        | ???  |    |          | NO        |
+| BNE        | ???  |    |          | NO        |
 
 
 #### jump type
@@ -71,7 +71,7 @@ probably just J
 
 ### Part 3 - state elements
 
-State elements consists of memories (so in multicycle processor, combined instruction and data memory) and an architectural state (program counter and registers). I've actually only implemented the register file before doing the part 4 and 5...
+State elements consists of memories (so in multicycle processor, combined instruction and data memory) and an architectural state (program counter and registers). 
 
 #### Register file
 
@@ -82,7 +82,7 @@ prob need to add the 0 reg (with 0 val), the 9 reg (with offset), and 1-8 gen pu
 
 #### Instructions and data memory
 
-This gets a little more complicated in multicycle, as I can make it as a one component. So now, bots the intructions and the RAM shares the same space. It makes it a little bit messy - currently, the first addresses are occupied by intructions, and the rest is reserved for RAM. ~This makes it a little bit silly, as the instructions space is not read-only.~ ~However, I've hardcoded the maximum size for the instructions - 128 bytes. This allows me to "translate" the given address from instruction to it's true address, and the programmer can use 0 - [??] addresses, and each address true address will be adjusted by offset [TODO: fix this description its very wonky]~  ~The program also must be hard-coded in the VHDL, and the programmer must be aware when does the instructions ends.~ ~Right now, I don't have an idea how to implement the read-only instruction memory. I think i can use the fact that the source of address input value is a multiplexer, and have some signal or sth that would decide wether it is a instruction address or data address.~ Ok so the problem was that i cannot read and i didn't understand how the sw and lw worked.
+This gets a little more complicated in multicycle, as I can make it as a one component. So now, bots the intructions and the RAM shares the same space. It makes it a little bit messy - currently, the first addresses are occupied by intructions, and the rest is reserved for RAM. Both pc counter and sw/lw instruction provide a correct address, no adjustment is needed. The offset is stored in a special register - 9 - and it should be used when calling the lw/sw instruction. Sw/lw should also be word aligned, but it's not checked in a CPU and the programmer should provide a correcty written instruction call.
 
 TODO PC and mem
 
@@ -95,7 +95,7 @@ TODO
 Firstly, I thought that it would be a good idea to reuse components like adder and stuff, but 1. I don't know how to use multiple entities in "when" block 2. it's actually very unnecessary and silly. So ALU it's just a case statement with operation depended on ALUControl value (3 bit vector) that comes from controller. Output is an operation result and a zero flag.
 I've partially reused ALU codes from book, replacing two operations with XOR and NOR. So now, it looks like this (SLT stands for "set if less than", returns 1 if a < b and 0 otherwise):
 
-TODO: probably add sll
+TODO: probably add sll as a 011
 
 | ALUControl | Function |
 |------------|----------|
@@ -122,9 +122,9 @@ This component has two jobs - sends ALUControl to ALU decoder, and sets every co
 
 TODO
 
-### Part 7 - datapath 
+### Part 7 - datapath
 
-TODO
+
 
 
 ##### TODO

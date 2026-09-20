@@ -53,10 +53,10 @@ begin
   -- the input is an address and whether it is a addres to read from or to store from
   -- read from: if it is a instruction, the PC knows the address, if RAM, the programmer must know the address to use (no offset for instructions is implemented).
 -- programmer rn MUST be aware of the byte-addressing of the memory
--- lw gives the sign-extended immediate address, so the read must account for this fact
--- lw and sw provides 
+-- lw and sw provides correct address, no adjustment is needed
 
-  address <= CONV_INTEGER(ra_in); -- TODO: all bits? immediate is only 7 bits so prob i can use this
+  address <= CONV_INTEGER(ra_in); 
+
 -- TODO: how many addresses can this immediate actually handle & adjust the memory size accordingly
 
     -- writting only on a rising edge of a clock
