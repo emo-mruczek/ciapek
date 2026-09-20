@@ -46,6 +46,10 @@ ARCHITECTURE behavior OF controller_tb IS
    signal regdst_out : std_logic;
    signal regwrite_out : std_logic;
    signal ALU_control_out : std_logic_vector(2 downto 0);
+
+
+  -- helper (controls + ALU control)
+  signal controller_state : STD_LOGIC_VECTOR(6 downto 0);
  
 BEGIN
  
@@ -68,10 +72,24 @@ BEGIN
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
-      wait for 100 ns;	
-
+      wait for 100 ns;
 
       -- insert stimulus here 
+
+      -----------------------------
+
+      -- lw 001 op 
+      opcode_in <= "001";
+      wait for 10 ns;
+      controller_state <= memwrite_out & regwrite_out & alusrc_out & memtoreg_out & ALU_control_out;
+      wait for 10 ns;
+      assert controller_state = "0111010" report "Wrong value" severity FAILURE;
+      
+      
+
+
+      report "!!!!!!! Everything's fine !!!!!!";
+      ---------------------------
 
       wait;
    end process;
