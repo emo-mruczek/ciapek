@@ -2,33 +2,26 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 -- TODO: controller fix
+-- TODO: check the instruction bits
 
 entity datapath is
     Port ( clk : in  STD_LOGIC;
            reset : in  STD_LOGIC;
            instruction_or_data : in STD_LOGIC;
            memory_write : in STD_LOGIC;
-           register_write : in STD_LOGIC
+           register_write : in STD_LOGIC;
+           pc_write : in STD_LOGIC;
+           alu_src_a : in STD_LOGIC;
+           alu_src_b : in STD_LOGIC_VECTOR (1 downto 0);
+           ALU_control_in : in  STD_LOGIC_VECTOR (2 downto 0);
+           zero_flag_out : out  STD_LOGIC
 
 );
         
-          -- memtoreg_in : in  STD_LOGIC;
-           --pcsrc_in : in  STD_LOGIC;
-           --aluscr_in : in  STD_LOGIC;
-           --regdst_in : in  STD_LOGIC;
-           --regwrite_in : in  STD_LOGIC;
-           --ALU_control_in : in  STD_LOGIC_VECTOR (2 downto 0);
-           -- zero_flag_out : out  STD_LOGIC );
-           --instruction_in : in  STD_LOGIC_VECTOR (15 downto 0);
-           -- read_data_in : in  STD_LOGIC_VECTOR (15 downto 0);
-          -- pc_out : out  STD_LOGIC_VECTOR (15 downto 0);
-          --  alu_out : out  STD_LOGIC_VECTOR (15 downto 0);
-          -- write_data_out : out  STD_LOGIC_VECTOR (15 downto 0));
 end datapath;
 
 architecture Structural of datapath is
 
-signal pc_next: STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
 signal pc_out: STD_LOGIC_VECTOR (15 downto 0);
 signal ALU_out: STD_LOGIC_VECTOR (15 downto 0);
 signal address: STD_LOGIC_VECTOR (15 downto 0);
@@ -39,7 +32,14 @@ signal a_out: STD_LOGIC_VECTOR (15 downto 0);
 signal b_out : STD_LOGIC_VECTOR (15 downto 0);
 signal instruction : STD_LOGIC_VECTOR (15 downto 0);
 signal data : STD_LOGIC_VECTOR (15 downto 0);
+signal src_a : STD_LOGIC_VECTOR (15 downto 0);
+signal src_b : STD_LOGIC_VECTOR (15 downto 0);
+signal sign_immediate : STD_LOGIC_VECTOR (15 downto 0);
+signal ALU_result : STD_LOGIC_VECTOR (15 downto 0);
 
+-- that one constant 
+
+constant two : STD_LOGIC_VECTOR (15 downto 0) := "0000000000000010";
 
 begin
 
@@ -52,7 +52,7 @@ program_counter: entity work.flipflop_reset(Behavioral)
   port map (
     clk => clk,
     reset => reset,
-    input => pc_next,
+    input => alu_result,
     output => pc_out
 );
 
@@ -79,12 +79,13 @@ memory: entity work.instruction_data_memory(Behavioral)
 
 -- two registers store, respectively, instruction or data, after fetch
 -- TODO: it should be enable register
-instruction_register: entity work.flipflop_reset(Behavioral)
+instruction_register: entity work.enable_register(Behavioral)
   port map (
     clk => clk,
     reset => reset,
     input => memory_out,
-    output => instruction
+    output => instruction,
+    enable => pc_write
 );
 
 
@@ -98,14 +99,13 @@ data_register: entity work.flipflop_reset(Behavioral)
 
 -- data and the specific bits of the instruction goes to the register file 
 -- TODO: ucf
--- TODO: which bits of an instruction
 register_file: entity work.register_file(Behavioral)
  port map(
     clk => clk,
     we3_in => register_write,
-    ra1_in => ra1_in,
-    ra2_in => ra2_in,
-    ra3_in => ra3_in,
+    ra1_in => instruction (15 downto 13),
+    ra2_in => instruction (12 downto 10),
+    ra3_in => instruction (12 downto 10),
     wd3_in => data,
     rd1_out => rd1_out,
     rd2_out => rd2_out,
@@ -150,40 +150,40 @@ register_B: entity work.flipflop_reset(Behavioral)
 
 pc_or_instruction: entity work.multiplexer_two(Behavioral)
  port map(
-    d0_in => d0_in,
-    d1_in => d1_in,
-    s_in => s_in,
-    output => output
+    d0_in => pc_out,
+    d1_in => a_out,
+    s_in => ALU_src_a,
+    output => src_a
 );
 
 -- sign extension of immediate field of an instruction (to 16 bit)
 
 sign_extension_inst: entity work.sign_extension(Behavioral)
  port map(
-    input => input,
-    output => output
+    input => instruction (6 downto 0), -- TODO: ?
+    output => sign_immediate
 );
 
 -- multiplexer that decides the second operand for the ALU 
 
 alu_source_b_decide: entity work.multiplexer_four(Behavioral)
  port map(
-    d0_in => d0_in,
-    d1_in => d1_in,
-    d2_in => d2_in,
-    d3_in => d3_in,
-    s_in => s_in,
-    output => output
+    d0_in => two, -- TODO: for now
+    d1_in => two, -- for next pc instruction - 
+    d2_in => sign_immediate,
+    d3_in => two, -- TODO: for now
+    s_in => ALU_src_b,
+    output => src_b
 );
 
 -- ALU 
 
 ALU_inst: entity work.ALU(Behavioral)
  port map(
-    srca_in => srca_in,
-    srcb_in => srcb_in,
-    control_in => control_in,
-    result_out => result_out,
+    srca_in => src_a,
+    srcb_in => src_b,
+    control_in => ALU_control_in,
+    result_out => ALU_result,
     zero_flag_out => zero_flag_out
 );
 
@@ -193,11 +193,9 @@ ALU_result_register: entity work.flipflop_reset(Behavioral)
  port map(
     clk => clk,
     reset => reset,
-    input => input,
-    output => output
+    input => alu_result,
+    output => alu_out
 );
-
-
 
 
 end Structural;
