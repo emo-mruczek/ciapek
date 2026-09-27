@@ -11,10 +11,14 @@ entity datapath is
            memory_write : in STD_LOGIC;
            register_write : in STD_LOGIC;
            pc_write : in STD_LOGIC;
+           ir_write : in STD_LOGIC;
            alu_src_a : in STD_LOGIC;
            alu_src_b : in STD_LOGIC_VECTOR (1 downto 0);
            ALU_control_in : in  STD_LOGIC_VECTOR (2 downto 0);
-           zero_flag_out : out  STD_LOGIC
+           zero_flag_out : out  STD_LOGIC;
+           dip0, dip1, dip2, dip3, dip4, dip5, dip6, dip7 : in STD_LOGIC := '0';
+           led0, led1, led2, led3, led4, led5, led6, led7 : out STD_LOGIC;
+           button0 : in STD_LOGIC
 
 );
         
@@ -47,13 +51,13 @@ begin
 -- let's start with lw 
 
 -- pc constains the address of the instruction to execute 
--- TODO: it should be enable register
-program_counter: entity work.flipflop_reset(Behavioral) 
+program_counter: entity work.enable_register(Behavioral) 
   port map (
     clk => clk,
     reset => reset,
     input => alu_result,
-    output => pc_out
+    output => pc_out,
+    enable => pc_write,    
 );
 
 -- is connected to the multiplexer that decide whether address given to memory is of an instruction or data 
@@ -78,14 +82,13 @@ memory: entity work.instruction_data_memory(Behavioral)
 );
 
 -- two registers store, respectively, instruction or data, after fetch
--- TODO: it should be enable register
 instruction_register: entity work.enable_register(Behavioral)
   port map (
     clk => clk,
     reset => reset,
     input => memory_out,
     output => instruction,
-    enable => pc_write
+    enable => ir_write
 );
 
 
@@ -103,9 +106,9 @@ register_file: entity work.register_file(Behavioral)
  port map(
     clk => clk,
     we3_in => register_write,
-    ra1_in => instruction (15 downto 13),
-    ra2_in => instruction (12 downto 10),
-    ra3_in => instruction (12 downto 10),
+    ra1_in => instruction (13 downto 11),
+    ra2_in => instruction (10 downto 7),
+    ra3_in => instruction (10 downto 7),
     wd3_in => data,
     rd1_out => rd1_out,
     rd2_out => rd2_out,
