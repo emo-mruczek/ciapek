@@ -47,7 +47,7 @@ OP - REG - REG - REG - SHAMT - FUNCT
 
 still not sure which ones to implement 
 
-OP - REG - REG - IMM
+OP - RS - RT - IMM
  3 -  3  -  3  -  7
 
 
@@ -58,6 +58,9 @@ OP - REG - REG - IMM
 | ADDI       | ???  |    |          | NO         |
 | BEQ        | ???  |    |          | NO        |
 | BNE        | ???  |    |          | NO        |
+
+
+LW - read a data word from memory into a register; RS - base; RG - destination reg; IMM - memory addr
 
 
 #### jump type
@@ -82,7 +85,7 @@ prob need to add the 0 reg (with 0 val), the 9 reg (with offset), and 1-8 gen pu
 
 #### Instructions and data memory
 
-This gets a little more complicated in multicycle, as I can make it as a one component. So now, bots the intructions and the RAM shares the same space. It makes it a little bit messy - currently, the first addresses are occupied by intructions, and the rest is reserved for RAM. Both pc counter and sw/lw instruction provide a correct address, no adjustment is needed. The offset is stored in a special register - 9 - and it should be used when calling the lw/sw instruction. Sw/lw should also be word aligned, but it's not checked in a CPU and the programmer should provide a correcty written instruction call.
+This gets a little more complicated in multicycle, as I can make it as a one component. So now, bots the intructions and the RAM shares the same space. It makes it a little bit messy - currently, the first addresses are occupied by intructions, and the rest is reserved for RAM. Both pc counter and sw/lw instruction provide a correct address, no adjustment is needed. The offset is stored in a special register - 8 - and it should be used when calling the lw/sw instruction. Sw/lw should also be word aligned, but it's not checked in a CPU and the programmer should provide a correcty written instruction call.
 
 TODO PC and mem
 

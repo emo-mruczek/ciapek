@@ -84,8 +84,6 @@ BEGIN
       controller_state <= memwrite_out & regwrite_out & alusrc_out & memtoreg_out & ALU_control_out;
       wait for 10 ns;
       assert controller_state = "0111010" report "Wrong value" severity FAILURE;
-      
-      
 
 
       report "!!!!!!! Everything's fine !!!!!!";

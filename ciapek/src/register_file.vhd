@@ -2,6 +2,10 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL; 
 
+
+-- TODO: register 8 as an offset
+-- so for the user there is only registers 2 to 7
+
 -- two read ports (ra1, ra2) and one write port (ra3)
 -- each specifies one of the 7 registers
 entity register_file is

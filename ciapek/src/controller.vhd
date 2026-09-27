@@ -4,6 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- TODO: signal names (absolute mess)
 -- TODO: testbench
+-- TODO: absolutely refactor its not for multicycle rn controller + main decoder
 
 entity controller is
     Port ( opcode_in : in  STD_LOGIC_VECTOR (2 downto 0);
